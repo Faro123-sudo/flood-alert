@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %} — {{ community.name }} Subscribers{% endblock %}
+{% block content %}
+
+<div style="margin-bottom:1rem;">
+  <a href="/admin" style="color:#64748b; text-decoration:none;">&larr; Admin</a>
+</div>
+
+<div class="card">
+  <h2>Subscribers — {{ community.name }}</h2>
+  {% if subscribers %}
+  <table>
+    <thead><tr><th>Phone</th><th>Active</th><th>Since</th><th>Action</th></tr></thead>
+    <tbody>
+      {% for s in subscribers %}
+      <tr>
+        <td>{{ s.phone }}</td>
+        <td>
+          {% if s.active %}
+          <span class="badge badge-normal">Active</span>
+          {% else %}
+          <span class="badge badge-warning">Inactive</span>
+          {% endif %}
+        </td>
+        <td>{{ s.created_at.strftime('%Y-%m-%d') }}</td>
+        <td>
+          <form method="POST" action="/admin/subscribers/{{ s.id }}/toggle" style="display:inline;">
+            <button type="submit" style="background:none; border:none; color:#38bdf8; cursor:pointer; font-size:0.85rem;">
+              {{ "Deactivate" if s.active else "Activate" }}
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:#64748b; font-size:0.9rem;">No subscribers yet. Users can text "FLOOD JOIN {{ community.name }}" to subscribe.</p>
+  {% endif %}
+</div>
+{% endblock %}

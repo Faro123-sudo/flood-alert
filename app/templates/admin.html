@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %} — Admin{% endblock %}
+{% block content %}
+
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+  <h1 style="font-size:1.25rem;">Admin Panel</h1>
+  <a href="/admin/communities/new" class="badge" style="background:#2563eb; color:#fff; text-decoration:none; padding:0.5rem 1rem; font-size:0.85rem;">+ Add Community</a>
+</div>
+
+<div class="card">
+  <h2>Communities</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Bank (m)</th>
+        <th>Ratio</th>
+        <th>Subs</th>
+        <th>Alerts</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in communities %}
+      <tr>
+        <td><a href="/communities/{{ c.id }}" style="color:#38bdf8;">{{ c.name }}</a></td>
+        <td>{{ c.lat }}, {{ c.lon }}</td>
+        <td>{{ c.bank_height_m }}</td>
+        <td>{{ c.rain_to_rise_ratio }}</td>
+        <td>{{ c.subscribers }}</td>
+        <td>{{ c.alerts }}</td>
+        <td>
+          <a href="/admin/communities/{{ c.id }}/edit" style="color:#38bdf8; text-decoration:none; margin-right:0.5rem;">Edit</a>
+          <a href="/admin/communities/{{ c.id }}/subscribers" style="color:#38bdf8; text-decoration:none; margin-right:0.5rem;">Subs</a>
+          <form method="POST" action="/admin/communities/{{ c.id }}/delete" style="display:inline;"
+                onsubmit="return confirm('Delete {{ c.name }}?')">
+            <button type="submit" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:0.85rem;">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>How to subscribe via SMS</h2>
+  <p style="color:#94a3b8; font-size:0.9rem;">
+    Users text the alert number with:<br>
+    <code style="background:#0f172a; padding:0.2rem 0.4rem; border-radius:0.25rem;">FLOOD JOIN TownName</code> to subscribe<br>
+    <code style="background:#0f172a; padding:0.2rem 0.4rem; border-radius:0.25rem;">FLOOD LEAVE</code> to unsubscribe<br>
+    <code style="background:#0f172a; padding:0.2rem 0.4rem; border-radius:0.25rem;">FLOOD STATUS</code> to check risk
+  </p>
+</div>
+{% endblock %}

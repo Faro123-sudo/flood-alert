@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %} — {{ community.name }}{% endblock %}
+{% block content %}
+
+<div style="margin-bottom:1rem;">
+  <a href="/" style="color:#64748b; text-decoration:none;">&larr; Dashboard</a>
+</div>
+
+<div class="grid-2">
+  <div>
+    <div class="card">
+      <h2>{{ community.name }}</h2>
+      <table>
+        <tr><td>Location</td><td>{{ community.lat }}, {{ community.lon }}</td></tr>
+        <tr><td>Bank height</td><td>{{ community.bank_height_m }}m</td></tr>
+        <tr><td>Rain→rise ratio</td><td>{{ community.rain_to_rise_ratio }}</td></tr>
+        <tr><td>Contact phones</td><td>{{ community.contact_phones or '—' }}</td></tr>
+        <tr><td>Current risk</td><td><span class="badge badge-{{ current_risk }}">{{ current_risk }}</span></td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Forecast Rainfall (7 day)</h2>
+      {% if forecast_labels != "[]" %}
+      <canvas id="rainChart" height="200"></canvas>
+      {% else %}
+      <p style="color:#64748b; font-size:0.9rem;">Forecast unavailable — check internet connection.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>Alert History</h2>
+      <table>
+        <thead><tr><th>Time</th><th>Level</th><th>24h Rain</th><th>Rise</th><th>Message</th></tr></thead>
+        <tbody>
+          {% for a in alerts %}
+          <tr>
+            <td style="white-space:nowrap;">{{ a.created_at[:16] }}</td>
+            <td><span class="badge badge-{{ a.risk_level }}">{{ a.risk_level }}</span></td>
+            <td>{{ "%.0f"|format(a.forecast_mm_24h) }}mm</td>
+            <td>{{ "%.1f"|format(a.predicted_rise_m) }}m</td>
+            <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis;">{{ a.message }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% if forecast_labels != "[]" %}
+<script>
+const ctx = document.getElementById('rainChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: {{ forecast_labels|safe }},
+    datasets: [{
+      label: 'mm/h',
+      data: {{ forecast_data|safe }},
+      backgroundColor: 'rgba(56, 189, 248, 0.5)',
+      borderColor: '#38bdf8',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: '#94a3b8', maxTicksLimit: 14 }, grid: { color: '#334155' } },
+      y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } }
+    }
+  }
+});
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %} — Dashboard{% endblock %}
+{% block content %}
+
+<div class="grid-2">
+  <div>
+    <div class="card">
+      <h2>Risk Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <h2>Communities</h2>
+      <div id="community-list">
+        {% for c in communities %}
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem 0; border-bottom:1px solid #334155;">
+          <div>
+            <a href="/communities/{{ c.id }}" style="color:#38bdf8; text-decoration:none; font-weight:600;">{{ c.name }}</a>
+            <div style="font-size:0.8rem; color:#64748b;">{{ c.lat }}, {{ c.lon }}</div>
+          </div>
+          <span class="badge badge-{{ c.risk_level or 'normal' }}">{{ c.risk_level or 'normal' }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Recent Alerts</h2>
+      <table>
+        <thead><tr><th>Community</th><th>Level</th><th>24h Rain</th><th>Rise</th></tr></thead>
+        <tbody>
+          {% for a in alerts %}
+          <tr>
+            <td>{{ a.community_name }}</td>
+            <td><span class="badge badge-{{ a.risk_level }}">{{ a.risk_level }}</span></td>
+            <td>{{ "%.0f"|format(a.forecast_mm_24h) }}mm</td>
+            <td>{{ "%.1f"|format(a.predicted_rise_m) }}m</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const map = L.map('map').setView([8.5, 6.5], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+const communities = {{ communities_json|safe }};
+const riskColors = { normal: '#22c55e', advisory: '#eab308', warning: '#f97316', evacuate: '#ef4444' };
+
+for (const c of communities) {
+  const color = riskColors[c.risk_level] || '#22c55e';
+  L.circleMarker([c.lat, c.lon], {
+    radius: 10, fillColor: color, color: '#fff', weight: 2, fillOpacity: 0.8
+  }).addTo(map)
+    .bindPopup(`<b>${c.name}</b><br>Risk: ${c.risk_level}<br>Bank: ${c.bank_height_m}m`);
+}
+</script>
+{% endblock %}
