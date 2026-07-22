@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Lokoja",
+    "lat": 7.803,
+    "lon": 6.739,
+    "bank_height_m": 8.0,
+    "rain_to_rise_ratio": 0.015,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Makurdi",
+    "lat": 7.732,
+    "lon": 8.539,
+    "bank_height_m": 6.5,
+    "rain_to_rise_ratio": 0.018,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Idah",
+    "lat": 7.113,
+    "lon": 6.738,
+    "bank_height_m": 7.0,
+    "rain_to_rise_ratio": 0.014,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Patigi",
+    "lat": 8.737,
+    "lon": 5.759,
+    "bank_height_m": 4.0,
+    "rain_to_rise_ratio": 0.025,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Yola",
+    "lat": 9.204,
+    "lon": 12.469,
+    "bank_height_m": 5.5,
+    "rain_to_rise_ratio": 0.016,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Jalingo",
+    "lat": 8.883,
+    "lon": 11.363,
+    "bank_height_m": 5.0,
+    "rain_to_rise_ratio": 0.019,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Abeokuta",
+    "lat": 7.151,
+    "lon": 3.354,
+    "bank_height_m": 4.5,
+    "rain_to_rise_ratio": 0.022,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Ibadan",
+    "lat": 7.396,
+    "lon": 3.916,
+    "bank_height_m": 4.0,
+    "rain_to_rise_ratio": 0.024,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Benin City",
+    "lat": 6.335,
+    "lon": 5.627,
+    "bank_height_m": 5.0,
+    "rain_to_rise_ratio": 0.02,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Warri",
+    "lat": 5.517,
+    "lon": 5.75,
+    "bank_height_m": 3.5,
+    "rain_to_rise_ratio": 0.03,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Sapele",
+    "lat": 5.893,
+    "lon": 5.684,
+    "bank_height_m": 3.8,
+    "rain_to_rise_ratio": 0.028,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Agbor",
+    "lat": 6.323,
+    "lon": 6.198,
+    "bank_height_m": 4.2,
+    "rain_to_rise_ratio": 0.023,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Calabar",
+    "lat": 4.958,
+    "lon": 8.326,
+    "bank_height_m": 4.5,
+    "rain_to_rise_ratio": 0.026,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Port Harcourt",
+    "lat": 4.815,
+    "lon": 7.05,
+    "bank_height_m": 3.0,
+    "rain_to_rise_ratio": 0.032,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Owerri",
+    "lat": 5.484,
+    "lon": 7.035,
+    "bank_height_m": 4.0,
+    "rain_to_rise_ratio": 0.025,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Aba",
+    "lat": 5.107,
+    "lon": 7.367,
+    "bank_height_m": 3.5,
+    "rain_to_rise_ratio": 0.028,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Enugu",
+    "lat": 6.441,
+    "lon": 7.499,
+    "bank_height_m": 5.5,
+    "rain_to_rise_ratio": 0.018,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Ilorin",
+    "lat": 8.496,
+    "lon": 4.542,
+    "bank_height_m": 4.5,
+    "rain_to_rise_ratio": 0.021,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Maiduguri",
+    "lat": 11.846,
+    "lon": 13.16,
+    "bank_height_m": 3.5,
+    "rain_to_rise_ratio": 0.03,
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "name": "Nguru",
+    "lat": 12.88,
+    "lon": 13.95,
+    "bank_height_m": 3.0,
+    "rain_to_rise_ratio": 0.033,
+    "timezone": "Africa/Lagos"
+  }
+]

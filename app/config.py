@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    database_url: str = "sqlite+aiosqlite:///./flood_alerts.db"
+    database_url: str = "sqlite+aiosqlite:///data/flood_alerts.db"
     weather_api_base: str = "https://api.open-meteo.com/v1"
     forecast_hours: int = 168
     sms_provider: str = "console"

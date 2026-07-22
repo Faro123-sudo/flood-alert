@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 
+import httpx
 from fastapi import APIRouter, Depends, HTTPException, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse, PlainTextResponse
 from fastapi.templating import Jinja2Templates
@@ -407,6 +408,29 @@ async def list_alerts(
 @api_router.get("/status")
 async def status():
     return {"service": "flood-alert", "running": True, "time": datetime.utcnow().isoformat()}
+
+
+@api_router.get("/search")
+async def search_places(q: str = ""):
+    if len(q.strip()) < 2:
+        return []
+    async with httpx.AsyncClient(timeout=10) as client:
+        resp = await client.get(
+            "https://nominatim.openstreetmap.org/search",
+            params={"q": q, "format": "json", "countrycodes": "ng", "limit": 8},
+            headers={"User-Agent": "FloodAlert/1.0"},
+        )
+        resp.raise_for_status()
+        results = resp.json()
+    return [
+        {
+            "name": r.get("display_name", "").split(",")[0],
+            "lat": float(r["lat"]),
+            "lon": float(r["lon"]),
+            "display": r.get("display_name", ""),
+        }
+        for r in results
+    ]
 
 
 # ── Helpers ──
